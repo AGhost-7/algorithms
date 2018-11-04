@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: gcc:7
+    steps:
+      - checkout
+      - run:
+          name: pull down submodules
+          command: git submodule update --init
+      - run:
+          name: run test
+          command: ./test.sh
