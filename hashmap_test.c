@@ -9,6 +9,6 @@ int main() {
 	hashmap_set(map, "data", 4, data);
 	printf("now getting\n");
 	char * result = (char *)hashmap_get(map, "data", 4);
-	printf("result: %s", result);
+	printf("result: %s\n", result);
 	return 0;
 }

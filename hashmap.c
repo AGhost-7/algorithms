@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#define __HASHMAP_DEBUG__
+//#define __HASHMAP_DEBUG__
 
 #ifdef __HASHMAP_DEBUG__
 #include <stdio.h>
