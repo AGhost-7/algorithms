@@ -19,4 +19,6 @@ int main() {
 	printf("appended %u\n", linkedlist_length(list));
 	result = list->tail->tail->head;
 	printf("list->tail->tail->head: %s\n", result);
+
+	linkedlist_free(list, 0);
 }

@@ -19,5 +19,6 @@ int main() {
 	char * result = (char *)hashmap_get(map, "data", 4);
 	printf("result: %s\n", result);
 	hashmap_free(map, HASHMAP_FREE_KEY | HASHMAP_FREE_VALUE);
+
 	return 0;
 }

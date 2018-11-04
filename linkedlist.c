@@ -57,3 +57,17 @@ uint32_t linkedlist_length(struct LinkedList * list)
 
 	return length;
 }
+
+void linkedlist_free(struct LinkedList * list, int free_items)
+{
+	struct LinkedList * ptr = list;
+
+	while(ptr != NULL) {
+		struct LinkedList * next = ptr->tail;
+		if (free_items) {
+			free(ptr->head);
+		}
+		free(ptr);
+		ptr = next;
+	}
+}

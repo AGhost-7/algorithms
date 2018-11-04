@@ -28,7 +28,10 @@ struct Hashmap {
 	struct HashmapEntry * entries;
 };
 
+/* Tell the hashmap_free function to free the memory of the stored keys */
 static const int HASHMAP_FREE_KEY = 0b00000001;
+
+/* The the hashmap_free function to free the memory of the stored values */
 static const int HASHMAP_FREE_VALUE = 0b00000010;
 
 struct Hashmap * hashmap_new();
@@ -39,7 +42,6 @@ void hashmap_set(struct Hashmap * map, char key [], int keylen, void * value);
 
 void hashmap_remove(struct Hashmap * map, char key [], int keylen);
 
-/* Frees up the memory. NOTE: this does not free the elements, it only
-deallocates the hashmap itself. */
+/* Frees up the memory. NOTE: this does not free the elements by default. */
 void hashmap_free(struct Hashmap * map, int flags);
 #endif
