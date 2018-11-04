@@ -12,3 +12,9 @@ compile -Imurmur3 -I. hashmap_test.c -o target/hashmap_test.o
 gcc target/hashmap_test.o target/hashmap.o target/murmur3.o -o target/hashmap_test
 
 ./target/hashmap_test
+
+compile linkedlist.c -o target/linkedlist.o
+compile -I. linkedlist_test.c -o target/linkedlist_test.o
+gcc target/linkedlist_test.o target/linkedlist.o -o  target/linkedlist_test
+
+./target/linkedlist_test
