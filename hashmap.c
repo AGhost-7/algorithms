@@ -136,6 +136,51 @@ void hashmap_set(struct Hashmap * map, char key [], int keylen, void * value)
 	}
 }
 
+void hashmap_free_bucket(struct HashmapEntry * entry, int flags)
+{
+	if (entry->bucket != NULL) {
+		if ((flags & HASHMAP_FREE_KEY) || (flags & HASHMAP_FREE_VALUE)) {
+			for (int b = 0; b < entry->bucket_len; b++) {
+				struct HashmapKeyValue * kv = entry->bucket + b;
+				if (flags & HASHMAP_FREE_KEY) {
+					DEBUG("hashmap_free::freeing key in bucket\n");
+					free(kv->key);
+				}
+				if (flags & HASHMAP_FREE_VALUE) {
+					DEBUG("hashmap_free::freeing value in bucket\n");
+					free(kv->value);
+				}
+			}
+			free(entry->bucket);
+		}
+	}
+}
+
+void hashmap_free(struct Hashmap * map, int flags)
+{
+	DEBUG("hashmap_free::flags: %d\n", flags);
+
+	for (int i = 0; i < HASHMAP_SIZE; i++) {
+		struct HashmapEntry * entry = map->entries + i;
+		if (entry->key == NULL) continue;
+		DEBUG("hashmap_free::freeing entry %d\n", i);
+
+		hashmap_free_bucket(entry, flags);
+
+		if (flags & HASHMAP_FREE_KEY) {
+			DEBUG("hashmap_free::freeing key\n");
+			free(entry->key);
+		}
+		if (flags & HASHMAP_FREE_VALUE) {
+			DEBUG("hashmap_free::freeing value\n");
+			free(entry->value);
+		}
+	}
+
+	free(map->entries);
+	free(map);
+}
+
 void hashmap_remove(struct Hashmap * map, char key [], int keylen)
 {
 	// TODO
