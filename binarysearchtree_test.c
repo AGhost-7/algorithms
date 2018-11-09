@@ -26,7 +26,8 @@ void insert_num(struct BinarySearchTree * tree, int num)
 	binarysearchtree_insert(tree, item);
 }
 
-int main() {
+int main()
+{
 	struct BinarySearchTree * tree = binarysearchtree_new(&compare);
 
 	insert_num(tree, 6);
@@ -34,7 +35,6 @@ int main() {
 	insert_num(tree, 3);
 	insert_num(tree, 5);
 	insert_num(tree, 10);
-	printf("root: %d\n", *((int *)tree->root->value));
 
 	assert(*((int *)tree->root->value) == 6);
 	assert(*((int *)tree->root->left->value) == 4);
