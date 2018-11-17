@@ -24,3 +24,9 @@ compile -I. binarysearchtree_test.c -o target/binarysearchtree_test.o
 gcc target/binarysearchtree_test.o target/binarysearchtree.o -o target/binarysearchtree_test
 
 ./target/binarysearchtree_test
+
+compile -I. circularbuffer.c -o target/circularbuffer.o
+compile -I. circularbuffer_test.c -o target/circularbuffer_test.o
+gcc target/circularbuffer.o target/circularbuffer_test.o -o target/circularbuffer_test
+
+./target/circularbuffer_test
