@@ -24,6 +24,18 @@ int main()
 	item = circularbuffer_insert(buffer, "six");
 	assert(item != NULL);
 	printf("Dropped: %s\n", item);
-	char * second = circularbuffer_remove(buffer);
-	printf("Second item: %s\n", second);
+	item = circularbuffer_remove(buffer);
+	printf("Second item: %s\n", item);
+
+	buffer = circularbuffer_new(3);
+	assert(circularbuffer_insert_clamped(buffer, "one") == 0);
+	assert(circularbuffer_insert_clamped(buffer, "two") == 0);
+	assert(circularbuffer_insert_clamped(buffer, "three") == 0);
+	assert(circularbuffer_insert_clamped(buffer, "four") == -1);
+
+	printf("First item: %s\n", (char *)circularbuffer_remove(buffer));
+	printf("Second item: %s\n", (char *)circularbuffer_remove(buffer));
+	printf("Third item: %s\n", (char *)circularbuffer_remove(buffer));
+	printf("Fourth item: %s\n", (char *)circularbuffer_remove(buffer));
+
 }

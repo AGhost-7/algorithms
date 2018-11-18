@@ -49,6 +49,17 @@ void * circularbuffer_insert(struct CircularBuffer * buffer, void * item)
 	return current_item;
 }
 
+int circularbuffer_insert_clamped(struct CircularBuffer * buffer, void * item)
+{
+	DEBUG("circularbuffer_insert_clamped::write index: %d\n", buffer->write);
+	if (*(buffer->items + buffer->write) != NULL) return -1;
+	*(buffer->items + buffer->write) = item;
+	buffer->write++;
+	if (buffer->write > buffer->size - 1) buffer->write = 0;
+	DEBUG("circularbuffer_insert_clamped::new write index: %d\n", buffer->write);
+	return 0;
+}
+
 void * circularbuffer_remove(struct CircularBuffer * buffer)
 {
 	void * item = *(buffer->items + buffer->read);

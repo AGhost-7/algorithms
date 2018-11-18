@@ -17,6 +17,10 @@ which has been replaced by the new item. If the circular buffer isn't full
 it will return a null pointer. */
 void * circularbuffer_insert(struct CircularBuffer * buffer, void * item);
 
+/* Insert an item into the circular buffer. If the buffer is full it will return
+-1 and not insert the item into the circular buffer. */
+int circularbuffer_insert_clamped(struct CircularBuffer * buffer, void * item);
+
 /* remove the first item in the circular buffer */
 void * circularbuffer_remove(struct CircularBuffer * buffer);
 
