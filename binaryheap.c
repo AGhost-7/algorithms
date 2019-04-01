@@ -65,6 +65,42 @@ void binaryheap_push(struct BinaryHeap * heap, void * item)
 	heap->length++;
 }
 
+void * binaryheap_pop(struct BinaryHeap * heap)
+{
+	if (heap->length == 0) return NULL;
+
+	void * poped = *heap->items;
+	// Make the last item and put it at the top, we'll have to re-sort from
+	// there.
+	*(heap->items) = *(heap->items + heap->length);
+	heap->length--;
+
+	int index = 0;
+	while (index < heap->length) {
+		void * parent = *(heap->items + index);
+		void * left = *(heap->items + index * 2 + 1);
+		void * right = *(heap->items + index * 2 + 2);
+
+		if (heap->compare(parent, left) < 0) {
+			*(heap->items + index) = left;
+			index = index * 2 + 1;
+			*(heap->items + index) = left;
+		} else if(heap->compare(parent, right) < 0) {
+			*(heap->items + index) = right;
+			index = index * 2 + 2;
+			*(heap->items + index) = right;
+		} else {
+			break;
+		}
+	}
+
+	if (heap->capacity > heap->length * 2) {
+		// TODO: shrink
+	}
+
+	return poped;
+}
+
 void * binaryheap_peek(struct BinaryHeap * heap)
 {
 	return *heap->items;

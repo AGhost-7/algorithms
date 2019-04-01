@@ -28,7 +28,11 @@ int main()
 		void * item = heap->items[index];
 		printf("item(%d): %d\n", index, *((int *)item));
 	}
-	int index = 0;
-	void * item = heap->items[index];//binaryheap_peek(heap);
+	void * item = binaryheap_peek(heap);
 	printf("peek: %d\n", *((int *)item));
+
+	while (item != NULL) {
+		item = binaryheap_pop(heap);
+		printf("pop: %d\n", *((int *)item));
+	}
 }
