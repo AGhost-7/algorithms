@@ -4,7 +4,7 @@ set -ex
 
 mkdir -p target
 
-compile() { gcc -Wall -x c -c $@; }
+compile() { gcc -g -Wall -x c -c $@; }
 
 compile murmur3/murmur3.c -o target/murmur3.o
 compile -Imurmur3 -I. hashmap.c -o target/hashmap.o
@@ -30,3 +30,9 @@ compile -I. circularbuffer_test.c -o target/circularbuffer_test.o
 gcc target/circularbuffer.o target/circularbuffer_test.o -o target/circularbuffer_test
 
 ./target/circularbuffer_test
+
+compile -I. binaryheap.c -o target/binaryheap.o
+compile -I. binaryheap_test.c -o target/binaryheap_test.o
+gcc -g target/binaryheap_test.o target/binaryheap.o -o target/binaryheap_test
+
+./target/binaryheap_test
