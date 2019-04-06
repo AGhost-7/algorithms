@@ -17,9 +17,7 @@ struct BinaryHeap * binaryheap_new(int (*compare)(void*, void*))
 	heap->length = 0;
 	heap->capacity = 10;
 	heap->compare = compare;
-	// No need to use calloc because we set the memory to something valid before
-	// reading from it.
-	heap->items = malloc(heap->capacity * sizeof(void *));
+	heap->items = calloc(heap->capacity, sizeof(void *));
 
 	return heap;
 }
